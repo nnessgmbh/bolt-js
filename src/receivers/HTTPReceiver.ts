@@ -392,8 +392,10 @@ export default class HTTPReceiver implements Receiver {
 
     // Handle custom routes
     if (Object.keys(this.routes).length) {
+      // const match = this.routes[path] && this.routes[path][method] !== undefined;
+      const { pathname: path } = new URL(req.url as string, 'http://localhost');
       const match = this.routes[path] && this.routes[path][method] !== undefined;
-      if (match) { return this.routes[path][method](req, res); }
+      if (match) { return this.routes[path][method](req, res);; }
     }
 
     // If the request did not match the previous conditions, an error is thrown. The error can be caught by
